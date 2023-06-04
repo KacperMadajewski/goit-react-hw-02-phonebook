@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import { ContactForm } from './ContactForm/ContactForm';
 
 export class App extends Component {
+
+  handleSubmit = (ev) => {
+    ev.preventDefault();
+    
+}
+
   render() {
     return (
       <div
@@ -12,7 +19,9 @@ export class App extends Component {
           fontSize: 40,
           color: '#010101',
         }}
-      ></div>
+      >
+        <ContactForm />
+      </div>
     );
   }
 }
