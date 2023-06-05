@@ -29,18 +29,34 @@ export class App extends Component {
     this.setState({ filter: ev.target.value });
   };
 
+  forDelet = id => {
+    const actualContacts = this.state.contacts.filter(
+      contact => contact.id !== id
+    );
+
+    this.setState({
+      contacts: actualContacts,
+      filter: '',
+    });
+  };
+
   handleSubmit = ev => {
     ev.preventDefault();
     const name1 = this.state.name;
     const number1 = this.state.number;
-    this.setState({
-      contacts: [
-        ...this.state.contacts,
-        { name: name1, number: number1, id: nanoid() },
-      ],
-      name: '',
-      number: '',
-    });
+    const existingName = this.state.contacts.find(
+      value => value.name.toLowerCase() === name1.toLowerCase()
+    );
+    existingName
+      ? alert(`Unfortunately name: ${name1} allready exist in this contacts!`)
+      : this.setState({
+          contacts: [
+            ...this.state.contacts,
+            { name: name1, number: number1, id: nanoid() },
+          ],
+          name: '',
+          number: '',
+        });
   };
 
   render() {
@@ -73,6 +89,7 @@ export class App extends Component {
         <ContactsList
           contactsData={this.state.contacts}
           filter={this.state.filter}
+          forDelet={this.forDelet}
         />
       </div>
     );

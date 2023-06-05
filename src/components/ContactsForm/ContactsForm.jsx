@@ -31,7 +31,9 @@ export class ContactsForm extends Component {
           placeholder="Write Your number"
           className={Styles.input}
         />
-        <button type="submit" className={Styles.btn}>Add contact</button>
+        <button type="submit" className={Styles.btn}>
+          Add contact
+        </button>
       </form>
     );
   }
