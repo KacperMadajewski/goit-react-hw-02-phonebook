@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ContactForm } from './ContactForm/ContactForm';
+import { ContactsForm } from './ContactsForm/ContactsForm';
 
 export class App extends Component {
 
@@ -20,7 +20,7 @@ export class App extends Component {
           color: '#010101',
         }}
       >
-        <ContactForm />
+        <ContactsForm />
       </div>
     );
   }

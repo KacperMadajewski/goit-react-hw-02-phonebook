@@ -1,3 +1,3 @@
 // import React, { Component } from "react";
 
-// export class ContactList extends Component
+// export class ContactsList extends Component
