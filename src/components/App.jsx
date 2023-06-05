@@ -1,12 +1,47 @@
 import React, { Component } from 'react';
 import { ContactsForm } from './ContactsForm/ContactsForm';
+import { nanoid } from 'nanoid';
+import { ContactsList } from './ContactsList/ContactsList';
+import { Filter } from './Filter/Filter';
 
 export class App extends Component {
+  state = {
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
+    name: '',
+    number: '',
+  };
 
-  handleSubmit = (ev) => {
+  handleNameChange = ev => {
+    this.setState({ name: ev.target.value });
+  };
+
+  handleNumberChange = ev => {
+    this.setState({ number: ev.target.value });
+  };
+
+  handleFilterChange = ev => {
+    this.setState({ filter: ev.target.value });
+  };
+
+  handleSubmit = ev => {
     ev.preventDefault();
-    
-}
+    const name1 = this.state.name;
+    const number1 = this.state.number;
+    this.setState({
+      contacts: [
+        ...this.state.contacts,
+        { name: name1, number: number1, id: nanoid() },
+      ],
+      name: '',
+      number: '',
+    });
+  };
 
   render() {
     return (
@@ -15,12 +50,30 @@ export class App extends Component {
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
+          flexDirection: 'column',
           alignItems: 'center',
-          fontSize: 40,
+          fontSize: 30,
           color: '#010101',
         }}
       >
-        <ContactsForm />
+        <h1>Phonebook</h1>
+        <ContactsForm
+          forSubmit={this.handleSubmit}
+          nameChange={this.handleNameChange}
+          numberChange={this.handleNumberChange}
+          valueName={this.state.name}
+          valueNumber={this.state.number}
+        />
+
+        <h2>Contacts</h2>
+        <Filter
+          filterChange={this.handleFilterChange}
+          valueFilter={this.state.filter}
+        />
+        <ContactsList
+          contactsData={this.state.contacts}
+          filter={this.state.filter}
+        />
       </div>
     );
   }
