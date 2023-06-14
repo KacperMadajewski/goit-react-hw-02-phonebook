@@ -17,16 +17,15 @@ export class App extends Component {
     number: '',
   };
 
-  handleNameChange = ev => {
-    this.setState({ name: ev.target.value });
-  };
-
-  handleNumberChange = ev => {
-    this.setState({ number: ev.target.value });
-  };
-
-  handleFilterChange = ev => {
-    this.setState({ filter: ev.target.value });
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    if (name === 'name') {
+      this.setState({ name: value });
+    } else if (name === 'number') {
+      this.setState({ number: value });
+    } else {
+      this.setState({ filter: value });
+    }
   };
 
   forDelet = id => {
@@ -75,15 +74,14 @@ export class App extends Component {
         <h1>Phonebook</h1>
         <ContactsForm
           forSubmit={this.handleSubmit}
-          nameChange={this.handleNameChange}
-          numberChange={this.handleNumberChange}
+          onChange={this.handleChange}
           valueName={this.state.name}
           valueNumber={this.state.number}
         />
 
         <h2>Contacts</h2>
         <Filter
-          filterChange={this.handleFilterChange}
+          filterChange={this.handleChange}
           valueFilter={this.state.filter}
         />
         <ContactsList

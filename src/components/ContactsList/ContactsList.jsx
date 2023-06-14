@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 export class ContactsList extends Component {
   render() {
@@ -22,3 +23,9 @@ export class ContactsList extends Component {
     );
   }
 }
+
+ContactsList.propTypes = {
+  contactsData: PropTypes.array.isRequired,
+  filter: PropTypes.string,
+  forDelet: PropTypes.func.isRequired,
+};
